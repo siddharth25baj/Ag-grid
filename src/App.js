@@ -12,7 +12,6 @@ const frameworkComponents = {
     actionsRenderer: GridComponents.ActionsRenderer
 };
 
-
 const App = () => {
 
     const [rowData, setRowData] = useState([]);
@@ -21,6 +20,14 @@ const App = () => {
 
     function toggleModal() {
         setIsOpen(!isOpen);
+    }
+
+    const customStyle={
+        content:{
+            width:'50%',
+            height:260,
+            margin:'auto'
+        }
     }
 
     const [athlete, setAthlete] = useState('');
@@ -79,7 +86,7 @@ const App = () => {
 
     return (
         <div className="ag-theme-alpine" style={{ height: 600, width: 1250 }}>
-            <button onClick={toggleModal}>Open modal</button>
+            <button onClick={toggleModal} style={{marginLeft:'600px'}}>Add Row</button>
             <AgGridReact
                 rowData={rowData}
                 onGridReady={onGridReady}
@@ -91,9 +98,10 @@ const App = () => {
                 isOpen={isOpen}
                 onRequestClose={toggleModal}
                 contentLabel="My dialog"
+                style={customStyle}
             >
                 <div>
-                    <form>
+                    <form style={{ width: '50px' }}>
                         <label for="athlete">Athlete:</label>
                         <input onChange={(e) => setAthlete(e.target.value)} type="text" id="athlete" name="athlete"></input>
                         <label for="gold">Gold:</label>
