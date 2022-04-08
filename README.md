@@ -1,8 +1,11 @@
 # Task
 Available Scripts:
+
 In the project directory, you can run:
 
 npm start
+
+Before npm start run npm i to install the dependencies.
 
 Runs the app in the development mode.
 
