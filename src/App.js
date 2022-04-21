@@ -16,6 +16,7 @@ Modal.setAppElement("#root");
 const App = () => {
 
     const [rowData, setRowData] = useState([]);
+    const [refreshTable, setRefreshTable] = useState(Date.now());
     const [isOpen, setIsOpen] = useState(false);
     const [gridApi, setGridApi] = React.useState(() => { });
 
@@ -51,14 +52,14 @@ const App = () => {
         setIsOpen(!isOpen);
     }
 
-    const onCellValueChanged = ({ data }) => {
+    const onCellValueChanged = ({ data, oldValue, colDef, rowIndex }) => {
         // console.log(data);
         if (data.athlete === '' || data.gold === '' || data.silver === '' || data.bronze === '' || data.country === '') {
-            window.confirm(`Please fill all the details`);
-            dataFetch();
-        }
-        else {
-
+            data[colDef.field] = oldValue
+            const alreadyModifiedRows = rowData
+            alreadyModifiedRows[rowIndex] = data
+            setRowData(alreadyModifiedRows)
+            setRefreshTable(Date.now())
         }
     }
 
@@ -146,6 +147,7 @@ const App = () => {
                 data-action="delete"
                 onClick={() => deleteRow()}>Delete</button>
             <AgGridReact
+                key={refreshTable}
                 rowData={rowData}
                 onGridReady={onGridReady}
                 columnDefs={columnDefs}
