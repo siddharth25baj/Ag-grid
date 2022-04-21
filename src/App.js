@@ -10,7 +10,7 @@ import uuid from "uuidv4";
 Modal.setAppElement("#root");
 
 // const frameworkComponents = {
-//     athleteRender: athleteRender
+//     actionsRenderer: GridComponents.ActionsRenderer
 // };
 
 const App = () => {
@@ -54,7 +54,7 @@ const App = () => {
     const onCellValueChanged = ({ data }) => {
         // console.log(data);
         if (data.athlete === '' || data.gold === '' || data.silver === '' || data.bronze === '' || data.country === '') {
-            window.confirm(`Please fill all details`);
+            window.confirm(`Please fill all the details`);
             dataFetch();
         }
         else {
